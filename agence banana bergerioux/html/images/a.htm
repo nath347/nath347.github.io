@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="origin-when-cross-origin">
+    <script>//<![CDATA[
+      var s = false;
+      function l() {
+        setTimeout(f, 10000);
+        if (document.referrer) {
+          try {
+            var pm = /(^|&|\?)px=([^&]*)(&|$)/i;
+            var px = window.location.href.match(pm);
+            var rs = document.referrer;
+            if (px != null) {
+              if (rs.match(pm))
+                rs = rs.replace(pm, "$1px=" + px[2] + "$3");
+              else if (rs.indexOf("?") != -1)
+                rs = rs + "&px=" + px[2];
+              else
+                rs = rs + "?px=" + px[2];
+            }
+            history.replaceState({}, "Bing", rs);
+            window.addEventListener("pageshow", function(e) { if (e.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2)) window.location.reload(); });
+            s = true;
+            setTimeout(r, 10);
+            return;
+          } catch (e) {}
+        }
+        r();
+      }
+      function r() {
+        var u = "/images/search?q=image%20de%20personne%20random&FORM=IQFRBA&id=04393DA8FF5D255F212F0CD3B324FDFFCAFFF448";
+        if (s)
+          window.location.href = u;
+        else
+          window.location.replace(u);
+      }
+      function f() {
+        document.getElementById("fb").style.display = "block";
+      }
+      //]]>
+    </script>
+  </head>
+  <body onload="l()">
+    <div id="fb" style="display: none">
+      Please <a href="https://www.bing.com/ck/a?!&&p=4c990d453d15d90397cdd674c05c070f9ba8af667bf93f5abb1bbf2af2665d3dJmltdHM9MTczNzQxNzYwMA&ptn=3&ver=2&hsh=4&fclid=16070568-e581-6345-24a7-1013e42f62ef&u=a1L2ltYWdlcy9zZWFyY2g_cT1pbWFnZSUyMGRlJTIwcGVyc29ubmUlMjByYW5kb20mRk9STT1JUUZSQkEmaWQ9MDQzOTNEQThGRjVEMjU1RjIxMkYwQ0QzQjMyNEZERkZDQUZGRjQ0OA&ntb=F">click here</a> if the page does not redirect automatically ...
+    </div>
+  </body>
+</html>
